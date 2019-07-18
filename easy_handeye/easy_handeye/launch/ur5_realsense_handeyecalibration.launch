@@ -1,0 +1,90 @@
+   <launch>
+        <arg name="namespace_prefix" default="ur5_realsense_handeyecalibration" />
+     
+        <arg name="robot_ip" doc="The IP address of the UR5 robot" />
+    		<!--<arg name="marker_frame" default="aruco_marker_frame"/>-->
+        <arg name="marker_size" doc="Size of the ArUco marker used, in meters" default="0.132" />
+        <arg name="marker_id" doc="The ID of the ArUco marker used" default="582" />
+     
+        <!-- start the realsense -->
+        <!-- <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" /> -->
+       <!--  <group ns="namespace1"> -->
+        <!-- <include file="$(find realsense_camera)/launch/zr300_nodelet_rgbd.launch" /> -->
+            <!-- <arg name="depth_registration" value="true" /> -->
+        <!-- </group> -->
+        <!-- </include> -->
+     
+        <!-- start ArUco -->
+        <node name="aruco_tracker" pkg="aruco_ros" type="single">
+            <!-- <remap from="/camera_info" to="/kinect2/hd/camera_info" /> -->
+            <remap from="/camera_info" to="/camera/color/camera_info" />
+            <!-- <remap from="/image" to="/kinect2/hd/image_color_rect" /> -->
+            <remap from="/image" to="/camera/color/image_raw" />
+            <param name="image_is_rectified" value="true"/>
+            <param name="marker_size"        value="$(arg marker_size)"/>
+            <param name="marker_id"          value="$(arg marker_id)"/>
+          <!--   <param name="reference_frame"    value="kinect2_rgb_optical_frame"/>
+            <param name="camera_frame"       value="kinect2_rgb_optical_frame"/> -->
+     
+            <!-- <param name="reference_frame"    value="camera_rgb_frame"/>
+            <param name="camera_frame"       value="camera_rgb_frame"/> -->
+     
+            <param name="reference_frame"    value="camera_link"/>
+            <param name="camera_frame"       value="camera_color_optical_frame"/>          <!--通过rviz 查看，已经修改为当前相机的坐标系  -->
+     
+     
+     
+            <param name="marker_frame"       value="camera_marker" />
+        </node>
+     
+    <!-- start the robot -->
+      <!--   <include file="$(find ur_modern_driver)/launch/ur10_bringup.launch">
+            <arg name="limited" value="true" />
+            <arg name="robot_ip" value="192.168.6.80" />
+        </include> -->
+     
+        <!-- <include file="$(find ur10_rg2_moveit_config)/launch/planning_context.launch">
+            <arg name="load_robot_description" value="false"/>
+            <arg name="load_robot_description" value="true"/> -->
+            <!-- <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch"> -->
+       <!--  </include>  -->
+     
+       <!--  <include file="$(find ur10_rg2_moveit_config)/launch/ur10_moveit_planning_execution.launch">
+            <arg name="limited" value="true" />
+        </include> -->
+     
+    <!-- start the robot222 -->
+    <!--     <group ns="namespace2">
+        <include file="$(find ur_control)/launch/ur10_control.launch">
+            <arg name="limited" value="true" />
+            <arg name="robot_ip" value="192.168.2.24" />
+        </include>
+        </group>
+        <group ns="namespace3">
+        <include file="$(find ur10_rg2_moveit_config)/launch/demo_norviz.launch"> -->
+        <!-- <include file="$(find ur10_rg2_moveit_config)/launch/demo.launch"> -->
+            <!-- <arg name="limited" value="true" />
+        </include>
+        </group>
+     -->
+    <!-- start easy_handeye -->
+        <include file="$(find easy_handeye)/launch/calibrate.launch" >
+            <arg name="namespace_prefix" value="$(arg namespace_prefix)" />
+            <arg name="eye_on_hand" value="false" />
+     
+            <!-- <arg name="tracking_base_frame" value="kinect2_rgb_optical_frame" /> -->
+            
+            <!-- <arg name="tracking_base_frame" value="camera_rgb_frame" /> -->
+            <arg name="tracking_base_frame" value="camera_link" />
+     
+            <arg name="tracking_marker_frame" value="camera_marker" />
+            <arg name="robot_base_frame" value="base_link" />
+            <arg name="robot_effector_frame" value="wrist_3_link" />　　　　　　　    <!--由于错误信息得知，已经修改为当前手腕三的坐标系  -->
+            <!-- <arg name="robot_effector_frame" value="rg2_eef_link" /> -->
+     
+            <arg name="freehand_robot_movement" value="false" />
+            <arg name="robot_velocity_scaling" value="0.5" />
+            <arg name="robot_acceleration_scaling" value="0.2" />
+        </include>
+     
+    </launch>
