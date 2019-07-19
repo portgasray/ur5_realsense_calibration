@@ -3,10 +3,11 @@
 
 ### Requires
 
-Assume you have the following environment:
+Make sure the following environment:
 
 * ROS kinetic
 * MoveIt 
+* librealsense & realsense-ros
 
 ### Prepare
 1. Build catkin workspace
@@ -21,13 +22,15 @@ catkin_make
 
 ```
 $ sudo apt-get install ros-kinetic-visp
+$ sudo apt-get install ros-kinetic-industrial-msgs
+$ sudo apt-get install ros-kinetic-ros-control ros-kinetic-ros-controllers
 ```
 
 
 3. Download the calibration lib
 ```
 $ cd ~/catkin_ws/src
-$ git clone https://github.com/portgasray/ur5_realsense_calibarion.git --recursive
+$ git clone https://github.com/portgasray/ur5_realsense_calibarion.git
 ```
 or
 ```
@@ -45,9 +48,13 @@ $ catkin_make
 
 ```
 cd ~/catkin_ws
-source ./deve/setup.bash
+source ./devel/setup.bash
 ```
-
+or a convenient way（if you have at least two workspaces, not recommended)
+```
+$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+$ source ~/.bashrc
+```
 ### Excution
 
 * launch communicaiton with real ur5 robot using IP
@@ -72,7 +79,7 @@ $ cd ~/catkin_ws
 $ roslaunch easy_handeye ur5_realsense_handeyecalibration.launch
 ```
 
-After that, you will see **three** GUI following:
+After that, you will see **three** GUI following(make sure your librealsense was installed at single path and the version accord with environment):
 
 1. ![Image text](./images/automatic_movement.png)
 
@@ -101,26 +108,43 @@ Begin start, Pleas slow down the speed of your robot
 
 Click Check starting Pose Button
 
-Take Next Pose Plan Excute Take Sample (another pannel )as a loop
+Take (Next Pose) (Plan) (Excute) (Take Sample) as a loop
 
 ** Just remember that, robot move a new pose than Take  Sample **
 
-Save ! Finish!
+** If board move out of sight, do not press (Take Sample) button, it may occur bug **
+
+** Plz take more than 8 sample, then press (Compute) button to get 7-element-matrix **
+
+ Save ! Finish!(The .yaml file will save at ~/.ros/easy_handeye/)
 
 ![Image text](./images/loop.png)
 
-You can have a look by publishing your calibration reslut.
+You can have a look by publishing your calibration result.
 
-1. without close other program window.
-
+1. Edit launch file and roslaunch it(without close other program window).
+ 1.1 copy parameters in .yaml to ur5_realsense_handeyecalibration_after2.launch(arg:x,y,z,qx,qy,qz,qw)
+ ```
+ sudo gedit ~/catkin_ws/src/ur5_realsense_calibarion/easy_handeye/easy_handeye/launch/ur5_realsense_handeyecalibration_after2.launch
+ sudo gedit ~/.ros/easy_handeye/ur5_realsense_handeyecalibration_eye_on_base.yaml
+ ```
+ ![Image text](./images/copy_matrix_to_launch1.png)
+ ![Image text](./images/copy_matrix_to_launch2.png)
+ 
+ 1.2 now roslaunch the launch file
 ```
-cd ~/catkin_ws
-source ./devel/setup.bash
-roslaunch  easy_handeye  publish.launch eye_on_hand:=false namespace_prefix:=ur5_realsense_handeyecalibration
-
+(do not run this command)roslaunch  easy_handeye  publish.launch eye_on_hand:=false namespace_prefix:=ur5_realsense_handeyecalibration
+(run this)roslaunch easy_handeye ur5_realsense_handeyecalibration_after2.launch 
 ```
+2.Add TF to see calibration result(in rviz)
+ if you find TF flash in rviz
+```
+sudo gedit ~/catkin_ws/src/ur5_realsense_calibarion/easy_handeye/easy_handeye/launch/calibrate.launch
+```
+comment out this code patch and re-launch
+![Image text](./images/calibrate_launch_comment_out.png)
 
-2. already all the terminal you opened just now.  ##TODO
+3. already all the terminal you opened just now.  ##TODO
 
 ```
 $ roslaunch ur_modern_driver ur5_bringup.launch limited:=true robot_ip:=169.254.6.80
