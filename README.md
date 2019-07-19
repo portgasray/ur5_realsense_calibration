@@ -3,7 +3,7 @@
 
 ### Requires
 
-Assume you have the following environment:
+Make sure the following environment:
 
 * ROS kinetic
 * MoveIt 
