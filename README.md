@@ -129,10 +129,11 @@ You can have a look by publishing your calibration result.
  ```
  ![Image text](./images/copy_matrix_to_launch1.png)
  ![Image text](./images/copy_matrix_to_launch2.png)
+ 
  1.2 now roslaunch the launch file
 ```
 (do not run this command)roslaunch  easy_handeye  publish.launch eye_on_hand:=false namespace_prefix:=ur5_realsense_handeyecalibration
-roslaunch easy_handeye ur5_realsense_handeyecalibration_after2.launch 
+(run this)roslaunch easy_handeye ur5_realsense_handeyecalibration_after2.launch 
 ```
 2.Add TF to see calibration result(in rviz)
  if you find TF flash in rviz
