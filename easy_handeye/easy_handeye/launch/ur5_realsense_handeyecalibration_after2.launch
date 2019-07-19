@@ -1,0 +1,24 @@
+<launch>
+	
+		<!-- start the robot -->
+  <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch">
+      <arg name="limited" value="true" />
+      <arg name="robot_ip" value="169.254.6.80" />
+  </include>
+  <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch">
+      <arg name="limited" value="true" />
+  </include>
+ 
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch">
+      <arg name="config" value="true" />
+  </include>
+ 
+ 
+	<!--<include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />-->
+ 
+ 
+	<!--<include file="$(find easy_handeye)/launch/publish.launch" />-->
+ 
+	<node pkg="tf" type="static_transform_publisher" name="ur5_broadcaster" args=" -0.07427868848074914 -0.5151402712869437 0.5263202824952005 -0.3811774134284603 -0.7688461277047242 0.32927060898269445  0.39390389369185613 base_link camera_link 100" />
+ 1q
+</launch>
