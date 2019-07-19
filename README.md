@@ -7,6 +7,7 @@ Assume you have the following environment:
 
 * ROS kinetic
 * MoveIt 
+* librealsense & realsense-ros
 
 ### Prepare
 1. Build catkin workspace
