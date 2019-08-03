@@ -164,4 +164,6 @@ In case you experience error with command above, you might want to run it withou
 2. Revise the content of ur5_realsense_handeyecalibration.launch
 [ur5_realsense_handeyecalibration.launch](https://github.com/portgasray/easy_handeye/blob/5ee30dd50f250452cdc56bfe8f4a7597f9d0b6d6/easy_handeye/launch/ur5_realsense_handeyecalibration.launch) in easy_handeye/launch changed for calibration, you may need to revise to yourself. 
 
+3. Built target ddynamic_reconfigure
+$ sudo apt-get install ros-kinetic-ddynamic_reconfigure
 
