@@ -20,5 +20,5 @@
 	<!--<include file="$(find easy_handeye)/launch/publish.launch" />-->
  
 	<node pkg="tf" type="static_transform_publisher" name="ur5_broadcaster" args=" -0.07427868848074914 -0.5151402712869437 0.5263202824952005 -0.3811774134284603 -0.7688461277047242 0.32927060898269445  0.39390389369185613 base_link camera_link 100" />
- 1q
+
 </launch>
