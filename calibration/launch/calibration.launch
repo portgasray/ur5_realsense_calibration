@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <arg name="limited" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false" />
+  <arg name="sim" default="false" /> -->
+
+  <!-- Remap follow_joint_trajectory -->
+  <!-- Remap gripper_cmd -->
+
+  <!-- start the robot -->
+  <include file="$(find ur_modern_driver)/launch/ur5_bringup.launch" >
+    <arg name="limited" value="true" />
+    <arg name="robot_ip" value="169.254.6.80" />
+  </include> 
+
+  <!-- Launch moveit -->
+  <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch">
+    <arg name="limited" value="true" />
+  </include>
+
+  <!-- launch point cloud -->
+  <include file="$(find realsense2_camera)/launch/rs_rgbd.launch" />
+
+  <!-- launch point cloud -->
+  <include file="$(find easy_handeye)/launch/ur5_realsense_handeyecalibration.launch" />
+
+</launch>

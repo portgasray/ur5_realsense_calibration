@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>calibration</name>
+  <version>0.4.0</version>
+  <description>
+	for calibration
+  </description>
+
+  <author>Lei Zhang</author>
+  <maintainer email="portgasray@163.com">Lei Zhang</maintainer>
+ 
+  <license>BSD</license>
+  <url>http://ros.org/wiki/urdf_tutorial</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <!-- <exec_depend>ur5_description</exec_depend> -->
+</package>
+
