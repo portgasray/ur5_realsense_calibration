@@ -167,3 +167,8 @@ In case you experience error with command above, you might want to run it withou
 3. Built target ddynamic_reconfigure
 $ sudo apt-get install ros-kinetic-ddynamic_reconfigure
 
+4. ~/calibration_ws/build/ur5_realsense_calibarion/aruco_ros/aruco_ros/setup_custom_pythonpath.sh: 5: exec: ~/calibration_ws/src/ur5_realsense_calibarion/aruco_ros/aruco_ros/cfg/ArucoThreshold.cfg: Permission denied
+
+```
+chmod +x [relevent .cfg]
+```
