@@ -144,14 +144,13 @@ sudo gedit ~/catkin_ws/src/ur5_realsense_calibarion/easy_handeye/easy_handeye/la
 comment out this code patch and re-launch
 ![Image text](./images/calibrate_launch_comment_out.png)
 
-3. already all the terminal you opened just now.  ##TODO
+using easy_handeye publish result
 
 ```
-$ roslaunch ur_modern_driver ur5_bringup.launch limited:=true robot_ip:=169.254.6.80
-$ roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch limited:=true
-$ roslaunch ur5_moveit_config moveit_rviz.launch config:=true # rviz
-$ 
+roslaunch easy_handeye publish.launch eye_on_hand:=true
+
 ```
+
 
 ### Trouble Shooting
 
