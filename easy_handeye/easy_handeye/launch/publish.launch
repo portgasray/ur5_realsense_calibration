@@ -21,4 +21,6 @@
         <param name="inverse" value="$(arg inverse)" />
         <node name="$(anon handeye_publisher)" pkg="easy_handeye" type="publish.py" output="screen"/>
     </group>
+    <node pkg="tf" type="static_transform_publisher" name="camera_link_"  args="0 0 0 -1.5707963268 0 -1.5707963268 camera_link2 camera_link 100"/>
+
 </launch>
